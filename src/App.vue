@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="main">
+    <char-list-area :char-lists="charLists.lists"></char-list-area>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CharListArea from '@/components/charListArea';
+import CharLists from '@/assets/charList.json';
+
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    "char-list-area": CharListArea
+  },
+  data() {
+    return {
+      charLists: CharLists,
+      chooseChars: "",
+      gameTimer: 0
+    }
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+.main {
+  width: 100%;
+  height: 100vh;
+  background-image: url("https://www.gamespark.jp/imgs/zoom/51250.jpg");
+  background-size: cover;
+  background-position: center;
+  
 }
 </style>
