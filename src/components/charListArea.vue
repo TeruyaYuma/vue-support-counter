@@ -22,9 +22,10 @@
             </ul>
         </div>
 
-        <div v-for="char in choose" :key="char.id">{{char}}</div>
+        <!-- <div v-for="char in choose" :key="char.id">{{char}}</div> -->
 
         <button @click="reset()">キャンセル</button>
+        <button @click="set()">決定</button>
     </div>
 </template>
 
@@ -34,7 +35,7 @@ export default {
     props: ['charLists'],
     data() {
         return {
-            choose: []
+            choose: [],
         }
     },
     created() {
@@ -47,16 +48,19 @@ export default {
             //選択キャラクター重複チェック
             if(this.choose.length !== 0){
                 for(let i=0; i<this.choose.length; i++ ){
-                    if(this.choose[i].id == char.id) return;
+                    if(this.choose[i].id === char.id) return;
                 }
             }
             //問題なければ
             //chooseにcharオブジェクトを配列として追加
-            console.log(char.id);
             this.choose.push(char);
         },
         reset() {
                 this.choose = [];
+        },
+        set() {
+            //選択キャラを親へ送信
+            this.$emit('on-set',this.choose);
         }
     }
 }
