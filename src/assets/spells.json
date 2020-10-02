@@ -1,0 +1,13 @@
+{
+    "spells": [
+        {"id": 0,"name": "Heal","CD": 240},
+        {"id": 1,"name": "Ghost","CD": 210},
+        {"id": 2,"name": "Barrier","CD": 180},
+        {"id": 3,"name": "Exhaust","CD": 210},
+        {"id": 4,"name": "Flash","CD": 300},
+        {"id": 5,"name": "Teleport","CD": 240},
+        {"id": 6,"name": "Smite","CD": 90},
+        {"id": 7,"name": "Cleanse","CD": 210},
+        {"id": 8,"name": "Ignite","CD": 180}
+    ]
+}

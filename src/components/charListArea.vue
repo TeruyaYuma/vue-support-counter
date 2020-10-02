@@ -35,7 +35,7 @@ export default {
     props: ['charLists'],
     data() {
         return {
-            choose: [],
+            choose: []
         }
     },
     created() {
@@ -59,6 +59,8 @@ export default {
                 this.choose = [];
         },
         set() {
+            //選択キャラ項目が全てセットされてないと終了
+            if(this.choose.length !== 5) return;
             //選択キャラを親へ送信
             this.$emit('on-set',this.choose);
         }

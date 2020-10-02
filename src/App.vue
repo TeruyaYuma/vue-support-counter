@@ -1,6 +1,15 @@
 <template>
   <div class="main">
-    <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
+
+    <template v-if="changeCmp">
+      <clip-board></clip-board>   
+    </template>
+
+    <template v-else>
+      <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
+    </template>
+    
+
 
     <div>
       <p>parentComponent</p>
@@ -10,27 +19,29 @@
 </template>
 
 <script>
-import CharListArea from '@/components/charListArea';
+import CharListArea from '@/components/CharListArea';
+import ClipBoard from '@/components/ClipBoard';
 import CharLists from '@/assets/charList.json';
 
 
 export default {
   name: 'App',
   components: {
-    "char-list-area": CharListArea
+    "char-list-area": CharListArea,
+    "clip-board": ClipBoard
   },
   data() {
     return {
       charLists: CharLists,
       chooseChars: [],
-      changeCmp: false
+      changeCmp: true
     }
   },
   methods: {
     onSet(val) {
-      //選択されたキャラクターをセット
-      console.log(val);
-      this.chooseChars = val;
+      //子から受け取ったキャラクターをセット
+      this.chooseChars = val.choose;
+      //画面切り替えフラグ
       this.changeCmp = true;
 
     }
