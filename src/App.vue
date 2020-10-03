@@ -2,7 +2,8 @@
   <div class="main">
 
     <template v-if="changeCmp">
-      <clip-board></clip-board>   
+      
+      <clip-board :choose-chars="chooseChars"></clip-board>   
     </template>
 
     <template v-else>
@@ -15,6 +16,7 @@
       <p>parentComponent</p>
       <p v-for="choose in chooseChars" :key="choose.id">{{choose.name}}</p>
     </div>
+
   </div>
 </template>
 
@@ -22,6 +24,8 @@
 import CharListArea from '@/components/CharListArea';
 import ClipBoard from '@/components/ClipBoard';
 import CharLists from '@/assets/charList.json';
+
+// import test from '@/components/test';
 
 
 export default {
@@ -34,13 +38,13 @@ export default {
     return {
       charLists: CharLists,
       chooseChars: [],
-      changeCmp: true
+      changeCmp: false
     }
   },
   methods: {
     onSet(val) {
       //子から受け取ったキャラクターをセット
-      this.chooseChars = val.choose;
+      this.chooseChars = val;
       //画面切り替えフラグ
       this.changeCmp = true;
 

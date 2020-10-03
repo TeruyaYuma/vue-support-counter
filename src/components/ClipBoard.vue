@@ -1,10 +1,31 @@
 <template>
     <div class="container">
-        <ul class="spel-list">
-            <template v-for="spell in SpellList.spells">
-                <li class="spel-item" :key="spell.id">{{spell.name}}</li>
-            </template>
+        <ul style="display: flex;">
+            <li @click="changeTab(0)">top</li>
+            <li @click="changeTab(1)">mid</li>
+            <li @click="changeTab(2)">jg</li>
+            <li @click="changeTab(3)">sup</li>
+            <li @click="changeTab(4)">adc</li>
         </ul>
+        <template v-for="(ch, index) in chooseChar">
+            <template v-if="index === active">
+                <div :key="ch.id" style="backgroundColor: gray;">
+
+                    <ul class="spel-list">
+                        <template v-for="spell in SpellList.spells">
+                            <li class="spel-item" :key="spell.id">
+                                {{spell.name}} : {{spell.CD}}
+                            </li>
+                        </template>
+                    </ul>
+
+                    <p>{{ch.name}}</p>
+                    <p>{{ch.R}}</p>
+
+                </div>
+            </template>
+        </template>
+
     </div>
 </template>
 
@@ -13,9 +34,17 @@ import SpellList from "@/assets/spells.json";
 
 export default {
     name: "ClipBoard",
+    props:["chooseChars"],
     data() {
         return {
-            SpellList: SpellList
+            SpellList: SpellList,
+            chooseChar: this.chooseChars,
+            active: 0
+        }
+    },
+    methods: {
+        changeTab(val) {
+            this.active = val;
         }
     }
 }
