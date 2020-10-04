@@ -1,20 +1,23 @@
 <template>
     <div class="container">
         <ul style="display: flex;">
-            <li @click="changeTab(0)">top</li>
-            <li @click="changeTab(1)">mid</li>
-            <li @click="changeTab(2)">jg</li>
-            <li @click="changeTab(3)">sup</li>
-            <li @click="changeTab(4)">adc</li>
+            <template v-for="role in roles">
+                <li @click="changeTab(role.id)" :key="role.id">{{ role.name }}</li>
+            </template>
         </ul>
+
         <template v-for="(ch, index) in chooseChar">
             <template v-if="index === active">
                 <div :key="ch.id" style="backgroundColor: gray;">
 
                     <ul class="spel-list">
-                        <template v-for="spell in SpellList.spells">
-                            <li class="spel-item" :key="spell.id">
-                                {{spell.name}} : {{spell.CD}}
+                        <template v-for="spell in spellList">
+                            <li 
+                                class="spel-item" 
+                                :key="spell.id"
+                                @click="setTimeCount(spell)"
+                            >
+                                {{spell.name}}
                             </li>
                         </template>
                     </ul>
@@ -26,25 +29,32 @@
             </template>
         </template>
 
+        <div>{{ result }}</div>
     </div>
 </template>
 
 <script>
 import SpellList from "@/assets/spells.json";
+import Role from "@/assets/role.json";
 
 export default {
     name: "ClipBoard",
     props:["chooseChars"],
     data() {
         return {
-            SpellList: SpellList,
+            spellList: SpellList.spells,
+            roles: Role.role,
             chooseChar: this.chooseChars,
-            active: 0
+            active: 0,
+            result: ""
         }
     },
     methods: {
         changeTab(val) {
             this.active = val;
+        },
+        setTimeCount(val) {
+            this.result = this.chooseChar[this.active].name + ' ' + this.chooseChar[this.active].R + ' ' + val.name + ' ' + val.CD;
         }
     }
 }

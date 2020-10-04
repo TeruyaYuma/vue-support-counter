@@ -1,0 +1,9 @@
+{
+    "role": [
+        {"id": 0, "name": "top"},
+        {"id": 1, "name": "mid"},
+        {"id": 2, "name": "jg"},
+        {"id": 3, "name": "sup"},
+        {"id": 4, "name": "adc"}
+    ]
+}
