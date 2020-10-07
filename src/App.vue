@@ -2,7 +2,6 @@
   <div class="main">
 
     <template v-if="changeCmp">
-      
       <clip-board :choose-chars="chooseChars"></clip-board>   
     </template>
 
@@ -13,16 +12,15 @@
 
 
     <div>
-      <p>parentComponent</p>
-      <p v-for="choose in chooseChars" :key="choose.id">{{choose.name}}</p>
+      <!-- <test></test> -->
     </div>
 
   </div>
 </template>
 
 <script>
-import CharListArea from '@/components/CharListArea';
-import ClipBoard from '@/components/ClipBoard';
+import CharListArea from '@/components/charList/CharListArea';
+import ClipBoard from '@/components/clipboard/ClipBoard';
 import CharLists from '@/assets/charList.json';
 
 // import test from '@/components/test';
@@ -32,7 +30,8 @@ export default {
   name: 'App',
   components: {
     "char-list-area": CharListArea,
-    "clip-board": ClipBoard
+    "clip-board": ClipBoard,
+    // "test": test
   },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div>
         <ul style="display: flex;">
             <template v-for="role in roles">
                 <li @click="changeTab(role.id)" :key="role.id">{{ role.name }}</li>
@@ -29,7 +29,7 @@
             </template>
         </template>
 
-        <div>{{ result }}</div>
+        <div>{{ time }}</div>
     </div>
 </template>
 
@@ -38,13 +38,17 @@ import SpellList from "@/assets/spells.json";
 import Role from "@/assets/role.json";
 
 export default {
-    name: "ClipBoard",
-    props:["chooseChars"],
+    name: "SpellList",
+    props:[
+        "chooseChars",
+        "time"
+    ],
     data() {
         return {
+            chooseChar: this.chooseChars,
+            times: this.time,
             spellList: SpellList.spells,
             roles: Role.role,
-            chooseChar: this.chooseChars,
             active: 0,
             result: ""
         }
@@ -59,28 +63,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-    .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        width: 50%;
-        height: 200px;
-        box-sizing: border-box;
-        padding: 20px;
-        color: white;
-        background: black;
-        border-radius: 5px;
-    }
-    .spel-list {
-        display: flex;
-        flex-wrap: wrap;
-        width: 60%;
-        height: 50%;
-    }
-    .spel-item {
-        margin-right: 10px;
-    }
-</style>
