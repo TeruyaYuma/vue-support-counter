@@ -1,10 +1,8 @@
 <template>
     <div>
-        <form name="form-sw" action="">
-            <input type="text" :value="counterFormat">
-            <input type="button" name="start" value="スタート" @click="startCount()" :disabled="ps">
-            <input type="button" name="restart" value="リセット" @click="resetCount()">
-        </form>
+        <div>{{counterFormat}}</div>
+        <button @click="startCount()">スタート</button>
+        <button @click="resetCount()">リセット</button>
     </div>
 </template>
 
@@ -15,32 +13,40 @@ export default {
     data(){
         return{
             timeNum: 0,
-            ps: false,
-            inervalFlg: false
+            doTimeFlg: false,
+            intervalFlg: false
         }
     },
     methods: {
-        resetCount() {
-            this.inervalFlg = true;
-            this.timeNum = 0
-        },
         startCount() {
+            //スタートタイムの重複防止
+            if(this.doTImeFlg) return;
+            this.doTImeFlg = true;
+            //clearIntervalの作動フラグを初期化
+            this.intervalFlg = false;
+            
             let timerID = 
                 setInterval( () => {
-                    if(this.inervalFlg) {
+                    //リセットが押されたら止める
+                    if(this.intervalFlg) {
                         clearInterval(timerID);
+                        this.setTime();
                         return;
                     }
-                    this.ps = true;
+
                     this.timeNum++;
-                    console.log(this.timeNum);
-                    this.setTime();
+
+                    this.setTime();   
                 },1000)
+        },
+        resetCount() {
+            this.intervalFlg = true;
+            this.doTImeFlg = false;
+            this.timeNum = 0
         },
         setTime() {
             this.$emit("onTime",this.timeNum);
         }
-
     },
     computed: {
         counterFormat() {

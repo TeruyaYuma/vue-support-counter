@@ -22,14 +22,15 @@
                         </template>
                     </ul>
 
-                    <p>{{ch.name}}</p>
-                    <p>{{ch.R}}</p>
+                    <p>{{ch.chanpion}}</p>
+                    <p @click="setTimeCount(ch)">{{ch.CD}}</p>
 
                 </div>
             </template>
         </template>
 
-        <div>{{ time }}</div>
+        
+        <div>{{ result }}</div>
     </div>
 </template>
 
@@ -46,9 +47,9 @@ export default {
     data() {
         return {
             chooseChar: this.chooseChars,
-            times: this.time,
             spellList: SpellList.spells,
             roles: Role.role,
+            timeNum: 0,
             active: 0,
             result: ""
         }
@@ -58,7 +59,18 @@ export default {
             this.active = val;
         },
         setTimeCount(val) {
-            this.result = this.chooseChar[this.active].name + ' ' + this.chooseChar[this.active].R + ' ' + val.name + ' ' + val.CD;
+            console.log(val);
+            this.timeNum = this.time;
+            this.result = this.chooseChar[this.active].chanpion + ' ' + val.name + ' ' + this.counterFormat(val.CD + this.timeNum);
+        },
+        counterFormat(num) {
+            let s = num % 60;
+            let m = Math.floor(num / 60);
+            let h = Math.floor(m / 60);
+            if(s < 10) s = "0" + s;
+            if(m < 10) m = "0" + m;
+            if(h < 10) h = "0" + h;
+            return h+ ":" +m+ ":" +s
         }
     }
 }

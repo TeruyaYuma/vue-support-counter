@@ -10,14 +10,14 @@
             </tr>
             <tr>
                 <template v-for="char in choose">
-                    <td :key="char.id">{{char.name}}</td>
+                    <td :key="char.id">{{char.chanpion}}</td>
                 </template> 
             </tr>
         </table>
         <div class="char-lists">
             <ul>
                 <template v-for="char in charLists">
-                    <li :key="char.id" @click="setCharList(char)">{{ char.name}}</li>
+                    <li :key="char.id" @click="setCharList(char)">{{ char.chanpion}}</li>
                 </template>
             </ul>
         </div>
