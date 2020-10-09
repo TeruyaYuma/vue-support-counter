@@ -30,7 +30,7 @@
         </template>
 
         
-        <div>{{ result }}</div>
+        <div @click="addClipBoard($event)">{{ result }}</div>
     </div>
 </template>
 
@@ -71,6 +71,10 @@ export default {
             if(m < 10) m = "0" + m;
             if(h < 10) h = "0" + h;
             return h+ ":" +m+ ":" +s
+        },
+        addClipBoard() {
+            console.log(this.result);
+            navigator.clipboard.writeText(this.result);
         }
     }
 }

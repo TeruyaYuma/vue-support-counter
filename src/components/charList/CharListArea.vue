@@ -1,26 +1,32 @@
 <template>
     <div class="list-wrapper">
-        <table>
-            <tr>
-                <td>top</td>
-                <td>mid</td>
-                <td>js</td>
-                <td>sup</td>
-                <td>adc</td>
-            </tr>
-            <tr>
-                <template v-for="char in choose">
-                    <td :key="char.id">{{char.chanpion}}</td>
-                </template> 
-            </tr>
+
+        <h1 class="title">Spell Counter</h1>
+
+        <table class="role">
+            <tbody>
+                <tr>
+                    <td>top</td>
+                    <td>mid</td>
+                    <td>js</td>
+                    <td>sup</td>
+                    <td>adc</td>
+                </tr>
+
+                <tr>
+                    <template v-for="char in choose">
+                        <td :key="char.id">{{char.chanpion}}</td>
+                    </template> 
+                </tr>
+            </tbody>
         </table>
-        <div class="char-lists">
-            <ul>
-                <template v-for="char in charLists">
-                    <li :key="char.id" @click="setCharList(char)">{{ char.chanpion}}</li>
-                </template>
-            </ul>
-        </div>
+
+        
+        <ul class="char">
+            <template v-for="char in charLists">
+                <li :key="char.id" @click="setCharList(char)">{{ char.chanpion}}</li>
+            </template>
+        </ul>
 
         <!-- <div v-for="char in choose" :key="char.id">{{char}}</div> -->
 
@@ -69,7 +75,7 @@ export default {
 </script>
 
 <style scoped>
-    .list-wrapper {
+    /* .list-wrapper {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -77,6 +83,23 @@ export default {
         color: white;
         background: black;
         border-radius: 5px;
+    } */
+    .title {
+        text-align: center;
+        font-size: 80px;
+        color: white;
+    }
+    .role {
+        margin: 0 auto;
+        width: 92%;
+        table-layout: fixed;
+        text-align: center;
+        font-size: 32px;
+        color: white;
+    }
+    .char {
+        width: 92%;
+        margin: 0 auto;
     }
     .choose-lists {
         display: flex;
