@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-
+    
     <template v-if="changeCmp">
       <clip-board :choose-chars="chooseChars"></clip-board>   
     </template>
@@ -10,10 +10,6 @@
     </template>
     
 
-
-    <div>
-      <!-- <test></test> -->
-    </div>
 
   </div>
 </template>
@@ -65,6 +61,8 @@ li {
   list-style: none;
 }
 .main {
+  display: flex;
+  justify-content: center;
   width: 100%;
   height: 100vh;
   background-image: url("https://www.gamespark.jp/imgs/zoom/51250.jpg");

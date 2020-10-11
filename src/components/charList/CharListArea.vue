@@ -21,14 +21,13 @@
             </tbody>
         </table>
 
+        <input type="text" v-model="keyword">
         
-        <ul class="char">
-            <template v-for="char in charLists">
+        <ul style="color: white;" class="char">
+            <template v-for="char in sortCharLists">
                 <li :key="char.id" @click="setCharList(char)">{{ char.chanpion}}</li>
             </template>
         </ul>
-
-        <!-- <div v-for="char in choose" :key="char.id">{{char}}</div> -->
 
         <button @click="reset()">キャンセル</button>
         <button @click="set()">決定</button>
@@ -41,7 +40,8 @@ export default {
     props: ['charLists'],
     data() {
         return {
-            choose: []
+            choose: [],
+            keyword: ""
         }
     },
     created() {
@@ -69,6 +69,52 @@ export default {
             if(this.choose.length !== 5) return;
             //選択キャラを親へ送信
             this.$emit('on-set',this.choose);
+        },
+        ////ソート関数////
+        sortChanp() {
+            return this.charLists.slice().sort( (a,b) => {
+                        return (a.chanpion > b.chanpion)? 1 : -1;
+                    })
+        },
+        searchChanp(chanp, keyword) {
+            let searchChars = [];
+            //検索
+            for(let i in chanp) {
+                let char = chanp[i];
+                //ソートされた配列の中から一致する文字列を抽出
+                //func kanaToHira;
+                if(this.kanaToHira(char.chanpion).indexOf(this.kanaToHira(keyword)) !== -1) {
+                    
+                    searchChars.push(char);
+                }
+            }
+            return searchChars;
+        },
+        kanaToHira(str) {
+            return str.replace(/[\u30a1-\u30f6]/g, function(match) {
+                console.log(match);
+                var chr = match.charCodeAt(0) - 0x60;
+                console.log(chr);
+                return String.fromCharCode(chr);
+            });
+        }
+    },
+    computed: {
+        sortCharLists() {
+            let sortChars = [];
+            let searchChars = [];
+            //sortCharsにソートされた配列を格納
+            sortChars = this.sortChanp();
+            //keywordに文字が入力されたら検索をかける
+            if(this.keyword) {
+                //検索結果
+                searchChars = this.searchChanp(sortChars, this.keyword);
+                
+                return searchChars
+            } else {
+                //検索ワードがなければそのままreturn
+                return sortChars;
+            }
         }
     }
 }
