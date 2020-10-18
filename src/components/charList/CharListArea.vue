@@ -6,11 +6,11 @@
         <table class="role">
             <tbody>
                 <tr>
-                    <td>top</td>
-                    <td>mid</td>
-                    <td>js</td>
-                    <td>sup</td>
-                    <td>adc</td>
+                    <td :class="{ 'red': (choose.length === 0)}">top</td>
+                    <td :class="{ 'red': (choose.length === 1)}">mid</td>
+                    <td :class="{ 'red': (choose.length === 2)}">js</td>
+                    <td :class="{ 'red': (choose.length === 3)}">sup</td>
+                    <td :class="{ 'red': (choose.length === 4)}">adc</td>
                 </tr>
 
                 <tr>
@@ -22,10 +22,15 @@
         </table>
 
         <input type="text" v-model="keyword">
-        
+
         <ul style="color: white;" class="char">
             <template v-for="char in sortCharLists">
-                <li :key="char.id" @click="setCharList(char)">{{ char.chanpion}}</li>
+                <li style="width: 100px;" :key="char.id" @click="setCharList(char)">
+                    <p>{{ char.chanpion}}</p>
+                    <div>
+                        <img style="width: 100%;" :src="require(`@/assets/images/${char.img}`)" alt="">
+                    </div>
+                </li>
             </template>
         </ul>
 
@@ -46,12 +51,13 @@ export default {
     },
     created() {
         console.log(this.charLists);
+        console.log(this.choose.length);
     },
     methods: {
         setCharList(char) {
-            //キャラクター選択上限
+            //キャラクター選択上限 (バリデーション)
             if(this.choose.length === 5) return;
-            //選択キャラクター重複チェック
+            //選択キャラクター重複チェック (バリデーション)
             if(this.choose.length !== 0){
                 for(let i=0; i<this.choose.length; i++ ){
                     if(this.choose[i].id === char.id) return;
@@ -91,7 +97,7 @@ export default {
             return searchChars;
         },
         kanaToHira(str) {
-            return str.replace(/[\u30a1-\u30f6]/g, function(match) {
+            return str.replace(/[\u30a1-\u30f6]/g, match => {
                 console.log(match);
                 var chr = match.charCodeAt(0) - 0x60;
                 console.log(chr);
@@ -121,6 +127,14 @@ export default {
 </script>
 
 <style scoped>
+    .red {
+        color: red;
+    }
+    p {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
     /* .list-wrapper {
         position: absolute;
         top: 50%;
@@ -144,8 +158,10 @@ export default {
         color: white;
     }
     .char {
-        width: 92%;
-        margin: 0 auto;
+        width: 30%;
+        /* margin: 0 auto; */
+        column-count: 2;
+        background: rgba(0,0,0, 0.8);
     }
     .choose-lists {
         display: flex;
