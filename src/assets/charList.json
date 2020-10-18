@@ -162,5 +162,6 @@
         {"id": 145, "chanpion": "ジリアン", "name": "ult", "CD": 80, "img": "zilean.jpg"},
         {"id": 146, "chanpion": "ゾーイ", "name": "ult", "CD": 30, "img": "zoe.jpg"},
         {"id": 147, "chanpion": "ザイラ", "name": "ult", "CD": 40, "img": "zyra.jpg"}
+        
     ]
 }
