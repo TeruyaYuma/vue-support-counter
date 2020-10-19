@@ -23,7 +23,7 @@
         {"id": 19, "chanpion": "バード", "name": "ult", "CD": 60, "img": "bard.jpg"},
         
         {"id": 20, "chanpion": "ブリッツクランク", "name": "ult", "CD": 30, "img": "blitzcrank.jpg"},
-        {"id": 21, "chanpion": "ブランド", "name": "ult", "CD": 40, "img": "bland.jpg"},
+        {"id": 21, "chanpion": "ブランド", "name": "ult", "CD": 40, "img": "brand.jpg"},
         {"id": 22, "chanpion": "ブラウム", "name": "ult", "CD": 50, "img": "braum.jpg"},
         {"id": 23, "chanpion": "ケイトリン", "name": "ult", "CD": 60, "img": "caitlyn.jpg"},
         {"id": 24, "chanpion": "カミール", "name": "ult", "CD": 70, "img": "camille.jpg"},
