@@ -1,5 +1,6 @@
 <template>
-  <div class="main">
+  <div class="main main--bg-image">
+    <div class="main main--bg-color">
     
     <template v-if="changeCmp">
       <clip-board :choose-chars="chooseChars"></clip-board>   
@@ -8,9 +9,7 @@
     <template v-else>
       <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
     </template>
-    
-
-
+    </div>
   </div>
 </template>
 
@@ -49,25 +48,18 @@ export default {
 </script>
 
 <style>
-body {
-  margin: 0;
-  padding: 0;
-}
-ul {
-  margin: 0;
-  padding: 0;
-}
-li {
-  list-style: none;
-}
 .main {
-  display: flex;
-  justify-content: center;
   width: 100%;
   height: 100vh;
+}
+.main--bg-image{
   background-image: url("https://www.gamespark.jp/imgs/zoom/51250.jpg");
   background-size: cover;
   background-position: center;
-  
+}
+.main--bg-color {
+  background: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  padding: 32px 10px;
 }
 </style>

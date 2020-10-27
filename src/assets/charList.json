@@ -163,7 +163,7 @@
         {"id": 146, "chanpion": "ゾーイ", "name": "ult", "CD": [11,8,5], "img": "zoe.jpg"},
         {"id": 147, "chanpion": "ザイラ", "name": "ult", "CD": [110,100,90], "img": "zyra.jpg"},
         {"id": 148, "chanpion": "イブリン", "name": "ult", "CD": [140,110,80], "img": "evelynn.jpg"},
-        {"id": 148, "chanpion": "セト", "name": "ult", "CD": [120,100,80], "img": "Sett.jpg"}
+        {"id": 149, "chanpion": "セト", "name": "ult", "CD": [120,100,80], "img": "Sett.jpg"}
         
     ]
 }

@@ -1,5 +1,6 @@
 <template>
     <div>
+        
         <ul style="display: flex;">
             <template v-for="role in roles">
                 <li @click="changeTab(role.id)" :key="role.id">{{ role.name }}</li>
@@ -7,6 +8,7 @@
         </ul>
 
         <template v-for="(ch, index) in chooseChar">
+
             <template v-if="index === active">
                 <div :key="ch.id" style="backgroundColor: gray;">
 
@@ -23,14 +25,15 @@
                     </ul>
 
                     <p>{{ch.chanpion}}</p>
-                    <p @click="setTimeCount(ch)">{{ch.CD}}</p>
+                    <p @click="setTimeCount(ch)">{{ch.CD[0]}}</p>
 
                 </div>
             </template>
-        </template>
 
+        </template>
         
         <div @click="addClipBoard($event)">{{ result }}</div>
+
     </div>
 </template>
 
@@ -60,8 +63,10 @@ export default {
         },
         setTimeCount(val) {
             console.log(val);
+            //リアルタイムをクリック時にエスケープ
             this.timeNum = this.time;
-            this.result = this.chooseChar[this.active].chanpion + ' ' + val.name + ' ' + this.counterFormat(val.CD + this.timeNum);
+            //func counterFormat
+            this.result = this.chooseChar[this.active].chanpion + ' ' + val.name + ' ' + this.counterFormat(val.CD[0] + this.timeNum);
         },
         counterFormat(num) {
             let s = num % 60;
@@ -74,6 +79,7 @@ export default {
         },
         addClipBoard() {
             console.log(this.result);
+            //クリップボードにコピー
             navigator.clipboard.writeText(this.result);
         }
     }
