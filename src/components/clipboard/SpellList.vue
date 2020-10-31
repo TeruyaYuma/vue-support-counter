@@ -2,14 +2,16 @@
     <div>
         
         <ul style="display: flex;">
+
             <template v-for="role in roles">
                 <li @click="changeTab(role.id)" :key="role.id">{{ role.name }}</li>
             </template>
+
         </ul>
 
         <template v-for="(ch, index) in chooseChar">
-
             <template v-if="index === active">
+
                 <div :key="ch.id" style="backgroundColor: gray;">
 
                     <ul class="spel-list">
@@ -19,7 +21,8 @@
                                 :key="spell.id"
                                 @click="setTimeCount(spell)"
                             >
-                                {{spell.name}}
+                                <p>{{spell.name}}</p>
+                                <img :src="require(`@/assets/images/${spell.img}`)" alt="">
                             </li>
                         </template>
                     </ul>
@@ -28,8 +31,8 @@
                     <p @click="setTimeCount(ch)">{{ch.CD[0]}}</p>
 
                 </div>
-            </template>
 
+            </template>
         </template>
         
         <div @click="addClipBoard($event)">{{ result }}</div>

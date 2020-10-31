@@ -1,22 +1,21 @@
 <template>
     <div class="container">
-        <div>{{ time }}</div>
 
         <timer @onTime="onTime($event)"></timer>
 
-        <v-spell-list :chooseChars="chooseChar" :time="time"></v-spell-list>
+        <spell-list :chooseChars="chooseChar" :time="time"></spell-list>
     </div>
 </template>
 
 <script>
 import Timer from "@/components/clipboard/Timer";
-import vSpellList from "@/components/clipboard/SpellList";
+import SpellList from "@/components/clipboard/SpellList";
 
 export default {
     name: "ClipBoard",
     components: {
         'timer': Timer,
-        'v-spell-list': vSpellList
+        'spell-list': SpellList
     },
     props:["chooseChars"],
     data() {

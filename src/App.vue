@@ -1,14 +1,19 @@
 <template>
   <div class="main main--bg-image">
     <div class="main main--bg-color">
-    
-    <template v-if="changeCmp">
-      <clip-board :choose-chars="chooseChars"></clip-board>   
-    </template>
 
-    <template v-else>
-      <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
-    </template>
+      <div class="mail">
+        <a class="mail__link" href="">メール</a>
+      </div>
+    
+      <template v-if="changeCmp">
+        <clip-board :choose-chars="chooseChars"></clip-board>   
+      </template>
+
+      <template v-else>
+        <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
+      </template>
+
     </div>
   </div>
 </template>
@@ -61,5 +66,16 @@ export default {
   background: rgba(0, 0, 0, 0.7);
   box-sizing: border-box;
   padding: 32px 10px;
+}
+.mail {
+  width: 100%;
+  height: 50px;
+  text-align: right;
+  line-height: 50px;
+}
+.mail__link {
+  margin-right: 20px;
+  text-decoration: none;
+  color: white;
 }
 </style>
