@@ -1,8 +1,10 @@
 <template>
-    <div>
-        <div>{{counterFormat}}</div>
-        <button @click="startCount()">スタート</button>
-        <button @click="resetCount()">リセット</button>
+    <div class="time">
+        <div class="time__txt">{{counterFormat}}</div>
+        <div class="time__btn">
+            <button class="btn btn--timer" @click="startCount()">スタート</button>
+            <button class="btn btn--timer" @click="resetCount()">リセット</button>
+        </div>
     </div>
 </template>
 
@@ -61,3 +63,25 @@ export default {
     }
 }
 </script>
+
+<style scoped>
+.time {
+    text-align: center;
+    margin-bottom: 120px;
+}
+.time__txt {
+    margin-bottom: 16px;
+    font-size: 48px;
+}
+.time__btn {
+    display: flex;
+    justify-content: space-between;
+}
+.btn {
+    border: none;
+    border-radius: 16px;
+}
+.btn--timer {
+    width: 49%;
+}
+</style>

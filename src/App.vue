@@ -1,18 +1,24 @@
 <template>
-  <div class="main main--bg-image">
-    <div class="main main--bg-color">
+  <div class="bg-image">
+    <div class="overray">
 
-      <div class="mail">
-        <a class="mail__link" href="">メール</a>
-      </div>
-    
-      <template v-if="changeCmp">
-        <clip-board :choose-chars="chooseChars"></clip-board>   
-      </template>
+      <header>
+        <div class="mail">
+          <a class="mail__link" href="">メール</a>
+        </div>
+      </header>
 
-      <template v-else>
-        <char-list-area :char-lists="charLists.lists" @on-set="onSet($event)"></char-list-area>
-      </template>
+      <main>
+        <template v-if="changeCmp">
+          <clip-board :choose-chars="chooseChars"></clip-board>   
+        </template>
+
+        <template v-else>
+          <char-list-area :char-lists="charLists.lists" :roles="roles.role" @on-set="onSet($event)"></char-list-area>
+        </template>
+      </main>
+
+      <!-- footer -->
 
     </div>
   </div>
@@ -22,6 +28,7 @@
 import CharListArea from '@/components/charList/CharListArea';
 import ClipBoard from '@/components/clipboard/ClipBoard';
 import CharLists from '@/assets/charList.json';
+import Roles from '@/assets/role.json';
 
 // import test from '@/components/test';
 
@@ -36,6 +43,7 @@ export default {
   data() {
     return {
       charLists: CharLists,
+      roles: Roles,
       chooseChars: [],
       changeCmp: false
     }
@@ -53,19 +61,26 @@ export default {
 </script>
 
 <style>
-.main {
+header {
+  width: 100%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bg-image{
   width: 100%;
   height: 100vh;
-}
-.main--bg-image{
   background-image: url("https://www.gamespark.jp/imgs/zoom/51250.jpg");
   background-size: cover;
   background-position: center;
 }
-.main--bg-color {
+.overray {
+  width: 100%;
+  height: 100vh;
   background: rgba(0, 0, 0, 0.7);
-  box-sizing: border-box;
-  padding: 32px 10px;
 }
 .mail {
   width: 100%;

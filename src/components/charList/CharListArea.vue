@@ -5,11 +5,9 @@
         <table class="role">
             <tbody>
                 <tr class="role__raw role__raw--title">
-                    <td class="role__txt" :class="{ 'red': (choose.length === 0)}">top</td>
-                    <td class="role__txt" :class="{ 'red': (choose.length === 1)}">mid</td>
-                    <td class="role__txt" :class="{ 'red': (choose.length === 2)}">js</td>
-                    <td class="role__txt" :class="{ 'red': (choose.length === 3)}">sup</td>
-                    <td class="role__txt" :class="{ 'red': (choose.length === 4)}">adc</td>
+                    <template v-for="role in roles">
+                        <td class="role__txt" :class="{ 'red': (choose.length === role.id)}" :key="role.id">{{ role.name }}</td>
+                    </template>
                 </tr>
 
                 <tr class="role__raw role__raw--body">
@@ -17,24 +15,25 @@
                         <td class="role__col" :key="char.id">
                             <p class="role__txt">{{char.chanpion}}</p>
 
-                                <div style="
-                                    margin: 0 auto;
-                                    width: 50%; 
-                                    height: 60%;
-                                    borderRadius: 50%;
-                                    overflow: hidden;"
-                                >
-                                    <img :src="require(`@/assets/images/${char.img}`)" alt="">
-                                </div>
+                            <div style="
+                                margin: 0 auto;
+                                width: 50%; 
+                                height: 60%;
+                                borderRadius: 50%;
+                                overflow: hidden;">
+                                    
+                                <img :src="require(`@/assets/images/${char.img}`)" alt="">
+                                
+                            </div>
                         </td>
                     </template> 
                 </tr>
             </tbody>
         </table>
 
-        <input type="text" v-model="keyword">
+        <input type="text" v-model="keyword" placeholder="検索">
 
-        <ul style="color: white;" class="char">
+        <ul class="char">
             <template v-for="char in sortCharLists">
                 <li style="width: 100px;" :key="char.id" @click="setCharList(char)">
                     <p>{{ char.chanpion}}</p>
@@ -53,7 +52,7 @@
 <script>
 export default {
     name: "CharListArea",
-    props: ['charLists'],
+    props: ['charLists','roles'],
     data() {
         return {
             choose: [],
@@ -138,10 +137,6 @@ export default {
 </script>
 
 <style scoped>
-    img {
-        width: 100%;
-        height: 100%;
-    }
     .container {
         margin: 0 auto;
         width: 80%;
@@ -169,7 +164,7 @@ export default {
         height: 40px;
     }
     .role__raw--body {
-        height: 100px;
+        height: 120px;
     }
     .role__txt {
         font-size: 24px;
@@ -180,10 +175,14 @@ export default {
         /* height: 100px; */
     }
     .char {
-        column-count: 6;
-        background: rgba(0,0,0, 0.8);
         box-sizing: border-box;
         padding: 20px;
+        width: 100%;
+        height: 400px;
+        /* column-count: 6; */
+        background: rgba(0,0,0, 0.8);
+        color: white;
+        overflow-y: scroll;
     }
     .choose-lists {
         display: flex;

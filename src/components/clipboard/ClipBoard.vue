@@ -34,25 +34,11 @@ export default {
 
 <style scoped>
     .container {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%,-50%);
+        margin: 0 auto;
         width: 50%;
         height: 200px;
         box-sizing: border-box;
         padding: 20px;
         color: white;
-        background: black;
-        border-radius: 5px;
-    }
-    .spel-list {
-        display: flex;
-        flex-wrap: wrap;
-        width: 60%;
-        height: 50%;
-    }
-    .spel-item {
-        margin-right: 10px;
     }
 </style>
