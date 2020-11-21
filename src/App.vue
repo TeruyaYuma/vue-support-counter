@@ -2,20 +2,23 @@
   <div class="bg-image">
     <div class="overray">
 
-      <header>
+      <header class="header">
+        <h1 class="header__title">SpellCounter</h1>
         <div class="mail">
           <a class="mail__link" href="">メール</a>
         </div>
       </header>
 
       <main>
-        <template v-if="changeCmp">
-          <clip-board :choose-chars="chooseChars"></clip-board>   
-        </template>
+        <div class="contaier">
+          <template v-if="changeCmp">
+            <clip-board :choose-chars="chooseChars"></clip-board>   
+          </template>
 
-        <template v-else>
-          <char-list-area :char-lists="charLists.lists" :roles="roles.role" @on-set="onSet($event)"></char-list-area>
-        </template>
+          <template v-else>
+            <char-list-area :char-lists="charLists.lists" :roles="roles.role" @on-set="onSet($event)"></char-list-area>
+          </template>
+        </div>
       </main>
 
       <!-- footer -->
@@ -64,6 +67,9 @@ export default {
 header {
   width: 100%;
 }
+main {
+  width: 100%;
+}
 img {
   width: 100%;
   height: 100%;
@@ -82,14 +88,29 @@ img {
   height: 100vh;
   background: rgba(0, 0, 0, 0.7);
 }
-.mail {
-  width: 100%;
+.contaier {
+  width: 80%;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 0 10px;
   height: 50px;
+  background: firebrick;
+}
+.header__title {
+  line-height: 50px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+}
+.mail {
   text-align: right;
   line-height: 50px;
 }
 .mail__link {
-  margin-right: 20px;
   text-decoration: none;
   color: white;
 }

@@ -1,29 +1,22 @@
 <template>
-    <div class="container">
-        <h1 class="title">Spell Counter</h1>
+    <div class="char-list-area">
+        <!-- <h1 class="cahr-list-area__title">Spell Counter</h1> -->
 
         <table class="role">
             <tbody>
-                <tr class="role__raw role__raw--title">
+                <tr class="role-row role-row--title">
                     <template v-for="role in roles">
-                        <td class="role__txt" :class="{ 'red': (choose.length === role.id)}" :key="role.id">{{ role.name }}</td>
+                        <td class="role-row__txt" :class="{ 'red': (choose.length === role.id)}" :key="role.id">{{ role.name }}</td>
                     </template>
                 </tr>
 
-                <tr class="role__raw role__raw--body">
+                <tr class="role-row role-row--body">
                     <template v-for="char in choose">
-                        <td class="role__col" :key="char.id">
-                            <p class="role__txt">{{char.chanpion}}</p>
+                        <td class="role-row__col" :key="char.id">
+                            <p class="role-row__txt">{{char.chanpion}}</p>
 
-                            <div style="
-                                margin: 0 auto;
-                                width: 50%; 
-                                height: 60%;
-                                borderRadius: 50%;
-                                overflow: hidden;">
-                                    
+                            <div class="role-row__img">    
                                 <img :src="require(`@/assets/images/${char.img}`)" alt="">
-                                
                             </div>
                         </td>
                     </template> 
@@ -31,7 +24,9 @@
             </tbody>
         </table>
 
-        <input type="text" v-model="keyword" placeholder="検索">
+        <div class="search-area">
+            <input type="text" class="serch-area__input" v-model="keyword" placeholder="検索">
+        </div>
 
         <ul class="char">
             <template v-for="char in sortCharLists">
@@ -86,19 +81,25 @@ export default {
             //選択キャラを親へ送信
             this.$emit('on-set',this.choose);
         },
-        ////ソート関数////
+        ////////////////////////////////////////
+        ////////////////ソート関数////////////////
+        ////////////////////////////////////////
+        //アイウエオ順
+        //func kanaToHira;
         sortChanp() {
             return this.charLists.slice().sort( (a,b) => {
-                        return (a.chanpion > b.chanpion)? 1 : -1;
+                        // 文字列をひらがなにして文字コードを基準に変換
+                        return (this.kanaToHira(a.chanpion) > this.kanaToHira(b.chanpion))? 1 : -1;
                     })
         },
+        //検索
+        //func kanaToHira;
         searchChanp(chanp, keyword) {
             let searchChars = [];
-            //検索
+            
             for(let i in chanp) {
                 let char = chanp[i];
                 //ソートされた配列の中から一致する文字列を抽出
-                //func kanaToHira;
                 if(this.kanaToHira(char.chanpion).indexOf(this.kanaToHira(keyword)) !== -1) {
                     
                     searchChars.push(char);
@@ -106,11 +107,12 @@ export default {
             }
             return searchChars;
         },
+        //ひらがな変換
         kanaToHira(str) {
             return str.replace(/[\u30a1-\u30f6]/g, match => {
-                console.log(match);
-                var chr = match.charCodeAt(0) - 0x60;
-                console.log(chr);
+                let chr;
+                chr = match.charCodeAt(0) - 0x60;
+
                 return String.fromCharCode(chr);
             });
         }
@@ -123,7 +125,7 @@ export default {
             sortChars = this.sortChanp();
             //keywordに文字が入力されたら検索をかける
             if(this.keyword) {
-                //検索結果
+                //検索があれば検索ワードを元に検索して返す
                 searchChars = this.searchChanp(sortChars, this.keyword);
                 
                 return searchChars
@@ -137,12 +139,11 @@ export default {
 </script>
 
 <style scoped>
-    .container {
-        margin: 0 auto;
-        width: 80%;
+    .char-list-area {
+        width: 100%;
     }
-    .title {
-        margin-bottom: 32px;
+    .cahr-list-area__title {
+        margin-bottom: 8px;
         text-align: center;
         font-size: 80px;
         color: white;
@@ -155,24 +156,37 @@ export default {
         font-size: 32px;
         color: white;
     }
-    .role__raw {
+    .role-row {
         width: 100%;
     }
-    .role__raw--title {
-        box-sizing: border-box;
-        padding: 10px;
+    .role-row--title {
         height: 40px;
     }
-    .role__raw--body {
-        height: 120px;
+    .role-row--body {
+        height: 135px;
     }
-    .role__txt {
+    .role-row__txt {
         font-size: 24px;
         font-weight: bold;
         vertical-align: middle;
+        box-sizing: border-box;
+        padding: 5px;
     }
-    .role__col {
+    .role-row__col {
         /* height: 100px; */
+    }
+    .role-row__img{
+        height: 100px;
+        width: 100px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 50%;
+        border: none;
+    }
+    .search-area {
+        width: 100%;
+        margin-bottom: 8px;
+        text-align: right;
     }
     .char {
         box-sizing: border-box;
@@ -183,6 +197,8 @@ export default {
         background: rgba(0,0,0, 0.8);
         color: white;
         overflow-y: scroll;
+        display: flex;
+        flex-wrap: wrap;
     }
     .choose-lists {
         display: flex;
@@ -195,6 +211,7 @@ export default {
     }
 
     .red {
-        color: red;
+        transform: scale(1.3);
+        transition: all 0.1s ease-out;
     }
 </style>

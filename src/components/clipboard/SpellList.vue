@@ -165,7 +165,7 @@ export default {
 }
 .bg {
     width: 100%;
-    background: gray;
+    background: rgb(128, 128, 128, 0.8);
     box-sizing: border-box;
     padding: 15px;
     border-radius: 0 5px 5px 5px;
