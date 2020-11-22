@@ -75,6 +75,12 @@ img {
   height: 100%;
   object-fit: cover;
 }
+input {
+  outline: none;
+}
+button {
+  outline: none;
+}
 
 .bg-image{
   width: 100%;
@@ -93,11 +99,12 @@ img {
   margin: 0 auto;
 }
 .header {
+  margin-bottom: 16px;
+  padding: 0 10px;
+  height: 50px;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  padding: 0 10px;
-  height: 50px;
   background: firebrick;
 }
 .header__title {

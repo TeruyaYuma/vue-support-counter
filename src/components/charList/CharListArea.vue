@@ -24,23 +24,25 @@
             </tbody>
         </table>
 
-        <div class="search-area">
-            <input type="text" class="serch-area__input" v-model="keyword" placeholder="検索">
+        <div class="search">
+            <input type="text" class="serch__input" v-model="keyword" placeholder="検索">
         </div>
 
-        <ul class="char">
+        <ul class="char-list">
             <template v-for="char in sortCharLists">
-                <li style="width: 100px;" :key="char.id" @click="setCharList(char)">
-                    <p>{{ char.chanpion}}</p>
-                    <div style="width: 100%; height: 100px;">
+                <li class="char-item" :key="char.id" @click="setCharList(char)">
+                    <p class="char-item__txt">{{ char.chanpion}}</p>
+                    <div class="char-item__img">
                         <img :src="require(`@/assets/images/${char.img}`)" alt="">
                     </div>
                 </li>
             </template>
         </ul>
 
-        <button @click="reset()">キャンセル</button>
-        <button @click="set()">決定</button>
+        <div class="btn-area">
+            <button class="btn btn--reset" @click="reset()">キャンセル</button>
+            <button class="btn btn--set" @click="set()">決定</button>
+        </div>
     </div>
 </template>
 
@@ -183,33 +185,67 @@ export default {
         border-radius: 50%;
         border: none;
     }
-    .search-area {
+    .search {
         width: 100%;
         margin-bottom: 8px;
         text-align: right;
     }
-    .char {
-        box-sizing: border-box;
-        padding: 20px;
+    .search__input {
+        border: none;
+        outline: none;
+        border-radius: 8px;
+        width: 192px;
+        height: 16px;
+    }
+    .char-list {
+        margin-bottom: 8px;
+        padding: 20px 4px 20px 20px;
         width: 100%;
         height: 400px;
-        /* column-count: 6; */
-        background: rgba(0,0,0, 0.8);
-        color: white;
+        box-sizing: border-box;
         overflow-y: scroll;
         display: flex;
         flex-wrap: wrap;
+        background: rgba(0,0,0, 0.8);
+        color: white;
     }
-    .choose-lists {
-        display: flex;
-        justify-content: space-around;
+    .char-item {
+        margin: 0px 16px 16px 0;
+        width: calc(10% - 16px);
     }
-    .char-lists {
-        margin-top: 32px;
-        border: 5px solid white;
+    .char-item__txt {
+        width: 100%;
+        height: 16px;
+        text-align: center;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .char-item__img {
+        width: 100%;
+        height: calc(100% - 16px);
+        overflow: hidden;
+        border-radius: 32px;
+    }
+    .btn-area {
+        text-align: right;
+    }
+    .btn {
+        border: none;
         border-radius: 5px;
+        cursor: pointer;
     }
-
+    .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 4px 4px 7px 5px black;
+        color: gray;
+    }
+    .btn--reset {
+        margin-right: 16px;
+        width: 80px;
+    }
+    .btn--set {
+        width: 80px;
+    }
     .red {
         transform: scale(1.3);
         transition: all 0.1s ease-out;
