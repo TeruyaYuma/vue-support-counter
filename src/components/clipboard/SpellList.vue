@@ -41,7 +41,7 @@
             
             <div class="result" @click="addClipBoard($event)">
                 <p class="result__txt">{{ result }}</p>
-                <i>O</i>
+                <font-awesome-icon icon="copy" class="result__icon"></font-awesome-icon>
             </div>
         </div>
 
@@ -162,6 +162,10 @@ export default {
     box-sizing: border-box;
     padding: 10px;
     color: black;
+}
+.result__icon {
+    vertical-align: middle;
+    cursor: pointer;
 }
 .bg {
     width: 100%;

@@ -234,17 +234,27 @@ export default {
         border-radius: 5px;
         cursor: pointer;
     }
-    .btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 4px 4px 7px 5px black;
-        color: gray;
-    }
     .btn--reset {
         margin-right: 16px;
-        width: 80px;
+        width: 160px;
+        padding: 10px;
     }
     .btn--set {
-        width: 80px;
+        width: 160px;
+        padding: 10px;
+    }
+    .btn:hover {
+        transition: all 0.1s ease-out;
+        transform: translateY(-2px);
+        box-shadow: 4px 4px 7px 5px black;
+    }
+    .btn--reset:hover {
+        background: rgb(178, 34, 34, 0.8);
+        color: white;
+    }
+    .btn--set:hover {
+        background: rgb(178, 34, 34, 0.8);
+        color: white;
     }
     .red {
         transform: scale(1.3);

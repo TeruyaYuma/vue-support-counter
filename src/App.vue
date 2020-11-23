@@ -5,11 +5,39 @@
       <header class="header">
         <h1 class="header__title">SpellCounter</h1>
         <div class="mail">
-          <a class="mail__link" href="">メール</a>
+          <font-awesome-icon 
+          icon="envelope" 
+          class="mail__icon"
+          @click="formToggle()"
+          >
+          </font-awesome-icon>
         </div>
       </header>
 
       <main>
+        <div class="form-container" :class="{'active': isForm}">
+          <div class="close">
+              <font-awesome-icon 
+              icon="times-circle" 
+              class="close__icon"
+              @click="formClose()"
+              >
+            </font-awesome-icon>
+          </div>
+
+          <form class="form" action="">
+            <h2 class="form__title">お問い合わせ</h2>
+
+            <label class="form_label" for="">件名</label>
+            <input class="form__input" type="text">
+            
+            <label class="form_label" for="">内容</label>
+            <textarea class="form_txtarea" name="" id=""></textarea>
+            
+            <button class="btn btn--form">送信</button>
+          </form>
+        </div>
+
         <div class="contaier">
           <template v-if="changeCmp">
             <clip-board :choose-chars="chooseChars"></clip-board>   
@@ -48,7 +76,8 @@ export default {
       charLists: CharLists,
       roles: Roles,
       chooseChars: [],
-      changeCmp: false
+      changeCmp: false,
+      isForm: false
     }
   },
   methods: {
@@ -58,6 +87,12 @@ export default {
       //画面切り替えフラグ
       this.changeCmp = true;
 
+    },
+    formToggle() {
+      this.isForm = !this.isForm;
+    },
+    formClose() {
+      this.isForm = false;
     }
   }
 }
@@ -77,6 +112,10 @@ img {
 }
 input {
   outline: none;
+  box-sizing: border-box;
+}
+textarea {
+  box-sizing: border-box;
 }
 button {
   outline: none;
@@ -105,7 +144,7 @@ button {
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  background: firebrick;
+  background: rgb(178, 34, 34);
 }
 .header__title {
   line-height: 50px;
@@ -117,8 +156,78 @@ button {
   text-align: right;
   line-height: 50px;
 }
-.mail__link {
-  text-decoration: none;
-  color: white;
+.mail__icon {
+  color: white; 
+  font-size: 32px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+.form-container {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+  height: 500px;
+  z-index: 1;
+}
+.form-container.active {
+  display: block;
+}
+.form {
+  border: none;
+  box-sizing: border-box;
+  padding: 64px 160px;
+  border-radius: 5px;
+  background: white;
+  text-align: center;
+}
+.close {
+  position: relative;
+}
+.close__icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 40px;
+}
+.form__title {
+  margin-bottom: 40px;
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+.form_label {
+  display: block;
+  margin-bottom: 8px;
+  text-align: left;
+}
+.form__input {
+  display: block;
+  width: 100%;
+  height: 40px;
+  margin-bottom: 16px;
+}
+.form_txtarea {
+  display: block;
+  width: 100%;
+  height: 128px;
+  margin-bottom: 16px;
+}
+.btn {
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.btn:hover {
+  transition: all 0.1s ease-out;
+  transform: translateY(-1px);
+  box-shadow: 5px 5px 7px 3px rgb(0, 0, 0, 0.8);
+}
+.btn--form {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 8px;
 }
 </style>
